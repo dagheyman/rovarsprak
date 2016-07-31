@@ -2,28 +2,22 @@
 
 import fileinput
 
-CONSONANTS = ["b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","z"]
+CONSONANTS = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','z']
 
 def parse(text):
-    result = ""
-    for line in text:
-        result += _parse_line(line)
-    return result
+    return ''.join([_parse_line(line) for line in text])
 
-def _consonant(letter):
-   return letter.lower() in CONSONANTS
+def _parse_line(line):
+    return ''.join([_parse_letter(letter) for letter in line])
+
+def _parse_letter(letter):
+    return _add_o(letter) if _consonant(letter) else letter
 
 def _add_o(letter):
     return letter + "o" + letter.lower()
 
-def _parse_line(line):
-    new_line = ""
-    for letter in line:
-        if _consonant(letter):
-            new_line += _add_o(letter)
-        else:
-            new_line += letter
-    return new_line
+def _consonant(letter):
+    return letter.lower() in CONSONANTS
 
 if __name__ == "__main__":
     print(parse(fileinput.input()))
