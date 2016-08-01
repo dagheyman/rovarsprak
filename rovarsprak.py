@@ -10,7 +10,7 @@ def parse(text):
 
 def _parse_char(char):
     return char + 'o' + char.lower() \
-            if char.lower() in CONSONANTS else char
+        if char.lower() in CONSONANTS else char
 
 if __name__ == "__main__":
     print(parse(fileinput.input()))
