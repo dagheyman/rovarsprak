@@ -5,10 +5,10 @@ import fileinput
 CONSONANTS = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','z']
 
 def parse(text):
-    return ''.join([_parse_line(line) for line in text])
+    return ''.join(_parse_line(line) for line in text)
 
 def _parse_line(line):
-    return ''.join([_parse_letter(letter) for letter in line])
+    return ''.join(_parse_letter(letter) for letter in line)
 
 def _parse_letter(letter):
     return _add_o(letter) if _consonant(letter) else letter
