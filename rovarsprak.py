@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import fileinput
 
 CONSONANTS = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l',
@@ -5,7 +7,19 @@ CONSONANTS = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l',
 
 
 def parse(text):
-    return ''.join(_parse_char(char) for line in text for char in line)
+    return ''.join(_parse_char(char) for char in text)
+
+
+def unparse(text):
+    result = ""
+    i = 0
+    while i < len(text):
+        result += text[i]
+        if text[i].lower() in CONSONANTS:
+            i += 3
+        else:
+            i += 1
+    return result
 
 
 def _parse_char(char):
@@ -13,4 +27,5 @@ def _parse_char(char):
         if char.lower() in CONSONANTS else char
 
 if __name__ == "__main__":
-    print(parse(fileinput.input()))
+    for line in fileinput.input():
+        print(parse(line))
